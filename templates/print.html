@@ -125,26 +125,49 @@
       }
     }
 
-    function checkPractice() {
-      const code = document.getElementById('practice-input').value.trim();
-      const resultBox = document.getElementById('result-box');
-      const errorMsg = document.getElementById('practice-error');
-      const correctSound = document.getElementById("correct-sound");
-      const wrongSound = document.getElementById("wrong-sound");
-      const username = "{{ session['username'] if 'username' in session else '' }}";
-      const expected = `print("${username}")`;
-      const expected = `print('${username}')`;
+    // function checkPractice() {
+    //   const code = document.getElementById('practice-input').value.trim();
+    //   const resultBox = document.getElementById('result-box');
+    //   const errorMsg = document.getElementById('practice-error');
+    //   const correctSound = document.getElementById("correct-sound");
+    //   const wrongSound = document.getElementById("wrong-sound");
+    //   const username = "{{ session['username'] if 'username' in session else '' }}";
+    //   const expected = `print("${username}")`;
 
-      if (code.replace(/\s+/g, '') === expected.replace(/\s+/g, '')) {
-        resultBox.classList.remove('hidden');
-        errorMsg.classList.add('hidden');
-        correctSound.play();
-      } else {
-        resultBox.classList.add('hidden');
-        errorMsg.classList.remove('hidden');
-        wrongSound.play();
-      }
-    }
+    //   if (code.replace(/\s+/g, '') === expected.replace(/\s+/g, '')) {
+    //     resultBox.classList.remove('hidden');
+    //     errorMsg.classList.add('hidden');
+    //     correctSound.play();
+    //   } else {
+    //     resultBox.classList.add('hidden');
+    //     errorMsg.classList.remove('hidden');
+    //     wrongSound.play();
+    //   }
+    // }
+
+    function checkPractice() {
+  const code = document.getElementById('practice-input').value.trim();
+  const resultBox = document.getElementById('result-box');
+  const errorMsg = document.getElementById('practice-error');
+  const correctSound = document.getElementById("correct-sound");
+  const wrongSound = document.getElementById("wrong-sound");
+  const username = "{{ session['username'] if 'username' in session else '' }}";
+
+  // 작은따옴표, 큰따옴표 모두 허용하고 공백 제거 후 비교
+  const normalized = code.replace(/\s+/g, '').replace(/'/g, '"');
+  const expected = `print("${username}")`;
+
+  if (normalized.startsWith(expected)) {
+    resultBox.classList.remove('hidden');
+    errorMsg.classList.add('hidden');
+    correctSound.play();
+  } else {
+    resultBox.classList.add('hidden');
+    errorMsg.classList.remove('hidden');
+    wrongSound.play();
+  }
+}
+
 
     // URL 파라미터로 탭 열기
     window.onload = function () {
