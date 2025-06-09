@@ -18,7 +18,7 @@ def save_users(users):
 
 @app.route('/')
 def homepage_start():
-    return render_template('homepage_start.html')
+    return render_template('index.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
