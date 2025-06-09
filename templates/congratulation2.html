@@ -63,7 +63,7 @@
     }
   </style>
 </head>
-<body>
+<!-- <body>
   <audio autoplay>
     <source src="{{ url_for('static', filename='audio/congratulations.mp3') }}" type="audio/mpeg" />
   </audio>
@@ -75,6 +75,22 @@
     <img src="{{ url_for('static', filename='images/badge2.png') }}" alt="Badge 2" class="badge-image" />
     <a href="/sandbox" class="continue-btn">Continue</a>
 
+
+  </div> -->
+
+  <body>
+  <audio id="audio">
+    <source src="{{ url_for('static', filename='audio/congratulations.mp3') }}" type="audio/mpeg" />
+  </audio>
+
+  <div class="wrapper">
+    <div class="text-content">
+      <h1>Congratulations!</h1>
+      <p>You unlocked a badge!</p>
+    </div>
+    <img src="{{ url_for('static', filename='images/badge2.png') }}" alt="Badge" class="badge-image" />
+    <a href="{{ url_for('concept_variable') }}" class="continue-btn" onclick="playAudio()">Continue</a>
   </div>
+
 </body>
 </html>

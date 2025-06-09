@@ -73,7 +73,7 @@
     <!-- Practice 탭 -->
     <div id="practice" class="tab-content p-6 bg-gray-800 rounded-xl shadow-md hidden">
       <h2 class="text-2xl font-bold mb-4">🧪 Practice</h2>
-      <p class="mb-4">Write code to print your name using your username.</p>
+      <p class="mb-4">Write code to print your username(ID).</p>
       <textarea id="practice-input" class="w-full h-32 bg-gray-700 text-white p-4 rounded"></textarea><br>
       <button onclick="checkPractice()" class="mt-3 bg-green-400 text-black px-4 py-2 rounded-full font-bold">Submit</button>
       <p id="practice-error" class="text-red-400 font-bold mt-3 hidden">Try Again</p>
@@ -133,6 +133,7 @@
       const wrongSound = document.getElementById("wrong-sound");
       const username = "{{ session['username'] if 'username' in session else '' }}";
       const expected = `print("${username}")`;
+      const expected = `print('${username}')`;
 
       if (code.replace(/\s+/g, '') === expected.replace(/\s+/g, '')) {
         resultBox.classList.remove('hidden');
