@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Codolingo - Sandbox</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2e2e2e;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .logo {
+      font-size: 3em;
+      font-weight: bold;
+      color: #66ffa1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 10px;
+    }
+
+    .badges img {
+      height: 50px;
+      cursor: pointer;
+    }
+
+    .user-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-controls button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .logout-btn {
+      background-color: #dcdcdc;
+      color: #000;
+    }
+
+    .sandbox-label {
+      background-color: #66ffa1;
+      color: black;
+      font-weight: bold;
+      padding: 8px 18px;
+      border-radius: 25px;
+      font-size: 1rem;
+    }
+
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      padding: 0 20px 20px;
+    }
+
+    .prompt-bar {
+      background-color: #dcdcdc;
+      color: #444;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .editor-container {
+      display: flex;
+      height: 75vh;
+      gap: 10px;
+    }
+
+    .editor, .output {
+      flex: 1;
+      background-color: #fff;
+      color: #000;
+      padding: 20px;
+      overflow: auto;
+      font-family: monospace;
+      font-size: 1em;
+      border: 5px solid #2e2e2e;
+    }
+
+    .run-btn {
+      background-color: #dcdcdc;
+      color: #000;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      align-self: flex-end;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      Codolingo
+      <span class="badges">
+        <a href="/concept/print">
+          <img src="{{ url_for('static', filename='images/badge1.png') }}" alt="Badge 1" />
+        </a>
+        <a href="/concept/variable">
+          <img src="{{ url_for('static', filename='images/badge2.png') }}" alt="Badge 2" />
+        </a>
+      </span>
+    </div>
+    <div class="user-controls">
+      <span class="text-lg font-bold">{{ session['username'] if 'username' in session else '' }}</span>
+      <span class="sandbox-label">SANDBOX</span>
+      <button class="logout-btn" onclick="location.href='/logout'">Log out</button>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="prompt-bar">Feel free to try out your Python skills!</div>
+    <button class="run-btn" onclick="runCode()">Run ▶</button>
+
+    <div class="editor-container">
+      <textarea id="codeEditor" class="editor">print("Hello, Python World!")</textarea>
+      <pre id="output" class="output"></pre>
+    </div>
+  </div>
+
+  <script>
+    async function runCode() {
+      const code = document.getElementById('codeEditor').value;
+      const outputElement = document.getElementById('output');
+      outputElement.textContent = "Running...";
+
+      try {
+        const response = await fetch('https://emkc.org/api/v2/piston/execute', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            language: 'python',
+            version: '3.10.0',
+            files: [{ name: 'main.py', content: code }]
+          })
+        });
+
+        const data = await response.json();
+        outputElement.textContent = data.run.output;
+      } catch (error) {
+        outputElement.textContent = "Error: " + error.message;
+      }
+    }
+  </script>
+</body>
+</html>

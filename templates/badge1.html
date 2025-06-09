@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unlocked Badge</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      background-color: #d9d9d9;
+      font-family: Arial, sans-serif;
+    }
+
+    .wrapper {
+      width: 100vw;
+      height: 100vh;
+      border-radius: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .text-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .text-content h1 {
+      font-size: 5rem;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .text-content p {
+      font-size: 3.7rem;
+      margin: 0.5rem 0 0;
+      font-weight: bold;
+    }
+
+    .badge-image {
+      max-width: 400px;
+      height: auto;
+    }
+
+    .continue-btn {
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      background-color: #1a1a1a;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s;
+    }
+
+    .continue-btn:hover {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay>
+    <source src="congratulations.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="wrapper">
+    <div class="text-content">
+      <h1>Congratulations!</h1>
+      <p>you unlocked a badge!</p>
+    </div>
+    <img src="badge1.png" alt="Badge" class="badge-image" />
+    <a href="variable.html" class="continue-btn">continue</a>
+  </div>
+</body>
+</html>
