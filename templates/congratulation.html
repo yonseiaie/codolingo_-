@@ -70,10 +70,9 @@
       background-color: #333;
     }
   </style>
-<
 
 
-<body>
+<!-- <body>
   <audio autoplay>
     <source src="{{ url_for('static', filename='audio/congratulations.mp3') }}" type="audio/mpeg" />
   </audio>
@@ -86,7 +85,29 @@
     <img src="{{ url_for('static', filename='images/badge1.png') }}" alt="Badge" class="badge-image" />
     <a href="{{ url_for('concept_variable') }}" class="continue-btn">Continue</a>
   </div>
+</body> -->
+
+<body>
+  <audio id="audio">
+    <source src="{{ url_for('static', filename='audio/congratulations.mp3') }}" type="audio/mpeg" />
+  </audio>
+
+  <div class="wrapper">
+    <div class="text-content">
+      <h1>Congratulations!</h1>
+      <p>You unlocked a badge!</p>
+    </div>
+    <img src="{{ url_for('static', filename='images/badge1.png') }}" alt="Badge" class="badge-image" />
+    <a href="{{ url_for('concept_variable') }}" class="continue-btn" onclick="playAudio()">Continue</a>
+  </div>
+
+  <script>
+    function playAudio() {
+      document.getElementById("audio").play();
+    }
+  </script>
 </body>
+
 
 
 </body>
