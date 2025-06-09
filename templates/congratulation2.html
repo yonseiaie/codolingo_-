@@ -63,7 +63,8 @@
     }
   </style>
 </head>
-<!-- <body>
+
+<body>
   <audio autoplay>
     <source src="{{ url_for('static', filename='audio/congratulations.mp3') }}" type="audio/mpeg" />
   </audio>
@@ -76,9 +77,9 @@
     <a href="/sandbox" class="continue-btn">Continue</a>
 
 
-  </div> -->
+  </div>
 
-  <body>
+  <!-- <body>
   <audio id="audio">
     <source src="{{ url_for('static', filename='audio/congratulations.mp3') }}" type="audio/mpeg" />
   </audio>
@@ -90,7 +91,12 @@
     </div>
     <img src="{{ url_for('static', filename='images/badge2.png') }}" alt="Badge" class="badge-image" />
     <a href="{{ url_for('concept_variable') }}" class="continue-btn" onclick="playAudio()">Continue</a>
-  </div>
+  </div> -->
 
+<script>
+    function playAudio() {
+      document.getElementById("audio").play();
+    }
+  </script>
 </body>
 </html>
